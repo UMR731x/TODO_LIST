@@ -3,207 +3,235 @@
 {
   "agents": {
     "defaults": {
-      "bootstrapMaxChars": 10000,
-      "compaction": {
-        "memoryFlush": {
-          "enabled": true
-        }
-      },
+      "workspace": "C:\\Users\\worker/.openclaw-autoclaw/workspace",
       "heartbeat": {
-        "every": "30m"
+        "every": "2h",
+        "isolatedSession": true
       },
-      "workspace": "C:\\Users\\worker\\.openclaw-windclaw\\users\\143907854-4fbbb7b318df\\openclaw\\workspace",
       "subagents": {
-        "allowAgents": [],
-        "maxSpawnDepth": 1,
-        "maxChildrenPerAgent": 1
+        "maxConcurrent": 16,
+        "maxChildrenPerAgent": 10,
+        "runTimeoutSeconds": 1200
       },
       "timeoutSeconds": 1800,
+      "compaction": {
+        "reserveTokensFloor": 40000,
+        "reserveTokens": 40000
+      },
+      "imageModel": {
+        "primary": "zai/zai_glm-5v-turbo"
+      },
       "model": {
-        "primary": "custom-aigatewa/AliceBase-windclaw",
-        "fallbacks": []
+        "primary": "zai/zai_auto"
       }
     },
     "list": [
       {
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
         "id": "main",
-        "name": "Main",
-        "workspace": "C:\\Users\\worker\\.openclaw-windclaw\\users\\143907854-4fbbb7b318df\\openclaw\\workspace",
-        "agentDir": "C:\\Users\\worker\\.openclaw-windclaw\\users\\143907854-4fbbb7b318df\\openclaw\\agents\\main\\agent",
+        "name": "main",
+        "workspace": "~/.openclaw-autoclaw/workspace",
         "default": true
+      },
+      {
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "id": "autoclaw",
+        "name": "autoclaw",
+        "workspace": "~/.openclaw-autoclaw/agents/autoclaw/workspace"
+      },
+      {
+        "subagents": {
+          "allowAgents": [
+            "*"
+          ]
+        },
+        "id": "newclaw",
+        "name": "newclaw",
+        "workspace": "~/.openclaw-autoclaw/agents/newclaw/workspace",
+        "model": "zai/zai_auto"
       }
     ]
   },
-  "skills": {
-    "load": {
-      "extraDirs": [
-        "C:\\Users\\worker\\.openclaw-windclaw\\users\\143907854-4fbbb7b318df\\openclaw\\shared-builtin-skills",
-        "C:\\Users\\worker\\.openclaw-windclaw\\users\\143907854-4fbbb7b318df\\openclaw\\custom-skills"
-      ]
-    }
-  },
   "gateway": {
-    "tailscale": {},
-    "mode": "local",
-    "auth": {
-      "mode": "token",
-      "token": "windclaw-2fca6e4f28e3ee5528d5c9d21be7787d"
-    },
-    "webchat": {
-      "chatHistoryMaxChars": 8000
-    }
-  },
-  "bindings": [
-    {
-      "agentId": "main",
-      "match": {
-        "channel": "feishu"
-      }
-    },
-    {
-      "agentId": "main",
-      "match": {
-        "channel": "openclaw-weixin"
-      }
-    },
-    {
-      "agentId": "main",
-      "match": {
-        "channel": "slack"
-      }
-    }
-  ],
-  "tools": {
-    "agentToAgent": {
-      "enabled": true,
-      "allow": [
-        "main"
-      ]
-    },
-    "byProvider": {
-      "custom-aigatewa": {
-        "profile": "full",
-        "alsoAllow": [
-          "document_search",
-          "wind_web_search"
-        ],
-        "deny": [
-          "web_search",
-          "web_fetch",
-          "browser"
-        ]
-      }
-    }
-  },
-  "mcp": {
-    "servers": {
-      "windclaw_installer": {
-        "url": "http://127.0.0.1:61661/installer-mcp",
-        "transport": "streamable-http",
-        "builtin": true,
-        "hidden": true,
-        "enabled": true,
-        "displayName": "WindClaw 安装助手"
-      },
-      "windclaw_mcp": {
-        "url": "https://m.wind.com.cn/Wind.MCP.Server/vserver/vserver_windclaw_wx/mcp",
-        "transport": "streamable-http",
-        "headers": {
-          "Content-Type": "application/json",
-          "Accept": "text/event-stream,application/json",
-          "wind.sessionid": "{{WIND_SESSION_ID}}",
-          "windsessionid": "{{WIND_SESSION_ID}}"
-        },
-        "connectionTimeoutMs": 10000,
-        "enabled": true,
-        "displayName": "windclaw_mcp",
-        "builtin": true
-      }
-    }
-  },
-  "models": {
-    "providers": {
-      "custom-aigatewa": {
-        "baseUrl": "http://127.0.0.1:61661/v1",
-        "api": "openai-completions",
-        "models": [
-          {
-            "id": "AliceBase-windclaw",
-            "name": "WindClaw",
-            "contextWindow": 188000
-          },
-          {
-            "id": "qwen3.6-plus",
-            "name": "qwen3.6-plus",
-            "contextWindow": 128000
-          }
-        ],
-        "apiKey": "no-key-required",
-        "authHeader": false
-      }
-    },
-    "mode": "replace"
-  },
-  "plugins": {
-    "enabled": true,
-    "load": {
-      "paths": [
-        "C:\\Users\\worker\\AppData\\Local\\Programs\\WindClaw\\resources\\openclaw-extensions\\wind_financial_data",
-        "C:\\Users\\worker\\AppData\\Local\\Programs\\WindClaw\\resources\\openclaw-extensions\\wind_web_search",
-        "C:\\Users\\worker\\AppData\\Local\\Programs\\WindClaw\\resources\\openclaw\\dist\\extensions\\feishu"
-      ]
-    },
-    "allow": [
-      "wind_financial_data",
-      "wind_web_search",
-      "feishu",
-      "slack"
-    ],
-    "entries": {
-      "wind_financial_data": {
-        "config": {
-          "url": "https://t.wind.com.cn/wstock_share/ai/run_workflow",
-          "headers": {
-            "Content-Type": "application/json",
-            "wind.sessionid": ""
-          },
-          "requestTimeoutMs": 30000
-        },
-        "enabled": true
-      },
-      "wind_web_search": {
-        "config": {
-          "url": "https://t.wind.com.cn/Wind.MCP.Server/vserver/vserver_windclaw/mcp",
-          "headers": {
-            "Content-Type": "application/json",
-            "wind.sessionid": ""
-          },
-          "requestTimeoutMs": 30000
-        },
-        "enabled": true
-      }
-    }
+    "mode": "local"
   },
   "update": {
     "checkOnStart": false
   },
-  "canvasHost": {
-    "enabled": false
+  "meta": {
+    "lastTouchedVersion": "2026.4.23",
+    "lastTouchedAt": "2026-06-15T03:20:20.903Z"
+  },
+  "session": {
+    "reset": {
+      "mode": "idle",
+      "idleMinutes": 10080
+    },
+    "dmScope": "per-account-channel-peer"
+  },
+  "tools": {
+    "fs": {
+      "workspaceOnly": true
+    },
+    "web": {
+      "search": {
+        "enabled": false
+      }
+    },
+    "deny": [
+      "browser"
+    ]
+  },
+  "models": {
+    "providers": {
+      "zai": {
+        "baseUrl": "https://autoglm-api.zhipuai.cn/autoclaw-proxy/proxy/autoclaw",
+        "apiKey": "autoclaw-internal-proxy",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "zai_auto",
+            "name": "Auto",
+            "contextWindow": 1048576,
+            "maxTokens": 393216,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "input": [
+              "text"
+            ],
+            "headers": {
+              "X-Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3MTA0MjcsImRldmljZV9pZCI6ImI4YmQxODdlYjZiMThhYTJkNjZlY2M5M2Q2YjgzZTRjNTk0Y2E4NGMwM2VhNzE0MGZjNTRjMDI5ZGE4YTBhZDEiLCJzb3VyY2VfaWQiOiJhdXRvY2xhd2FjY2Vzc190b2tlbiIsImd1aWQiOiIiLCJpc19ndWVzdCI6ZmFsc2UsInBvd2VyIjowLCJleHAiOjE3ODE1ODAwMTgsImlhdCI6MTc4MTQ5MzYxOCwianRpIjoiMTMyNDgxOTA0MzkifQ.oPuezcMaUWzj9t_UK-yCiInvjyYDMRzwpFKopqll3fM",
+              "X-Request-Model": "zai_auto",
+              "X-Tm": "win",
+              "X-Version": "1.5.1",
+              "X-Product": "autoclaw",
+              "X-Channel": "AutoClaw3",
+              "X-Lang": "zh-CN"
+            }
+          },
+          {
+            "id": "zai_pony-alpha-2",
+            "name": "GLM-5-Turbo",
+            "contextWindow": 204800,
+            "maxTokens": 131072,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "input": [
+              "text"
+            ],
+            "headers": {
+              "X-Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3MTA0MjcsImRldmljZV9pZCI6ImI4YmQxODdlYjZiMThhYTJkNjZlY2M5M2Q2YjgzZTRjNTk0Y2E4NGMwM2VhNzE0MGZjNTRjMDI5ZGE4YTBhZDEiLCJzb3VyY2VfaWQiOiJhdXRvY2xhd2FjY2Vzc190b2tlbiIsImd1aWQiOiIiLCJpc19ndWVzdCI6ZmFsc2UsInBvd2VyIjowLCJleHAiOjE3ODE1ODAwMTgsImlhdCI6MTc4MTQ5MzYxOCwianRpIjoiMTMyNDgxOTA0MzkifQ.oPuezcMaUWzj9t_UK-yCiInvjyYDMRzwpFKopqll3fM",
+              "X-Request-Model": "zai_pony-alpha-2",
+              "X-Tm": "win",
+              "X-Version": "1.5.1",
+              "X-Product": "autoclaw",
+              "X-Channel": "AutoClaw3",
+              "X-Lang": "zh-CN"
+            }
+          },
+          {
+            "id": "zai_glm-5v-turbo",
+            "name": "GLM-5V-Turbo",
+            "contextWindow": 204800,
+            "maxTokens": 131072,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "input": [
+              "text",
+              "image"
+            ],
+            "headers": {
+              "X-Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3MTA0MjcsImRldmljZV9pZCI6ImI4YmQxODdlYjZiMThhYTJkNjZlY2M5M2Q2YjgzZTRjNTk0Y2E4NGMwM2VhNzE0MGZjNTRjMDI5ZGE4YTBhZDEiLCJzb3VyY2VfaWQiOiJhdXRvY2xhd2FjY2Vzc190b2tlbiIsImd1aWQiOiIiLCJpc19ndWVzdCI6ZmFsc2UsInBvd2VyIjowLCJleHAiOjE3ODE1ODAwMTgsImlhdCI6MTc4MTQ5MzYxOCwianRpIjoiMTMyNDgxOTA0MzkifQ.oPuezcMaUWzj9t_UK-yCiInvjyYDMRzwpFKopqll3fM",
+              "X-Request-Model": "zai_glm-5v-turbo",
+              "X-Tm": "win",
+              "X-Version": "1.5.1",
+              "X-Product": "autoclaw",
+              "X-Channel": "AutoClaw3",
+              "X-Lang": "zh-CN"
+            }
+          },
+          {
+            "id": "zai_glm-5.1",
+            "name": "GLM-5.1",
+            "contextWindow": 204800,
+            "maxTokens": 131072,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "input": [
+              "text"
+            ],
+            "headers": {
+              "X-Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3MTA0MjcsImRldmljZV9pZCI6ImI4YmQxODdlYjZiMThhYTJkNjZlY2M5M2Q2YjgzZTRjNTk0Y2E4NGMwM2VhNzE0MGZjNTRjMDI5ZGE4YTBhZDEiLCJzb3VyY2VfaWQiOiJhdXRvY2xhd2FjY2Vzc190b2tlbiIsImd1aWQiOiIiLCJpc19ndWVzdCI6ZmFsc2UsInBvd2VyIjowLCJleHAiOjE3ODE1ODAwMTgsImlhdCI6MTc4MTQ5MzYxOCwianRpIjoiMTMyNDgxOTA0MzkifQ.oPuezcMaUWzj9t_UK-yCiInvjyYDMRzwpFKopqll3fM",
+              "X-Request-Model": "zai_glm-5.1",
+              "X-Tm": "win",
+              "X-Version": "1.5.1",
+              "X-Product": "autoclaw",
+              "X-Channel": "AutoClaw3",
+              "X-Lang": "zh-CN"
+            }
+          }
+        ],
+        "headers": {
+          "x_trace_id": "autoclaw-desktop"
+        }
+      }
+    }
+  },
+  "skills": {
+    "allowBundled": [
+      "__none__"
+    ]
+  },
+  "plugins": {
+    "entries": {
+      "evolution-proposal": {
+        "enabled": true
+      },
+      "openclaw-lark": {
+        "enabled": true
+      }
+    },
+    "slots": {
+      "memory": "none"
+    },
+    "installs": {}
   },
   "channels": {
     "feishu": {
-      "enabled": true,
-      "defaultAccount": "main",
-      "accounts": {
-        "main": {
-          "enabled": true,
-          "appId": "cli_aa942651e6335bc3",
-          "appSecret": "8CM8QlInMaCV3yWFhrO2wdoc0t8YnJTK",
-          "connectionMode": "websocket",
-          "domain": "feishu",
-          "dmPolicy": "open"
-        }
-      }
+      "connectionMode": "websocket",
+      "requireMention": true,
+      "appId": "cli_aa942651e6335bc3",
+      "appSecret": "8CM8QlInMaCV3yWFhrO2wdoc0t8YnJTK",
+      "domain": "feishu",
+      "dmPolicy": "allowlist",
+      "allowFrom": [
+        "ou_4aa5b24ad226aa0d0d6c8308a00de1a2"
+      ],
+      "enabled": true
     }
   }
 }
