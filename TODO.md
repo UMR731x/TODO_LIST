@@ -3,7 +3,7 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.4.14",
-    "lastTouchedAt": "2026-06-15T06:26:09.105Z"
+    "lastTouchedAt": "2026-06-15T07:58:36.932Z"
   },
   "wizard": {
     "lastRunAt": "2026-02-07T16:02:33.289Z",
@@ -376,13 +376,36 @@
         ],
         "apiKey": "sk-kimi-GgL2hdUiCk9TfONQFSoPhBTNjuckH5BQsqqtSSHv2mlFG2sloBzMivfIF2FGgXTB",
         "api": "anthropic-messages"
+      },
+      "deepseek": {
+        "baseUrl": "https://api.deepseek.com/v1",
+        "models": [
+          {
+            "id": "deepseek-v4-flash",
+            "name": "deepseek-v4-flash",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 1048576,
+            "maxTokens": 50000
+          }
+        ],
+        "apiKey": "sk-b59962b589cc45c4b02a4e5cd7d04b77",
+        "api": "openai-completions"
       }
     }
   },
   "agents": {
     "defaults": {
       "model": {
-        "primary": "moonshot-coding-plan/kimi-for-coding",
+        "primary": "deepseek/deepseek-v4-flash",
         "fallbacks": []
       },
       "imageModel": {
@@ -436,6 +459,9 @@
         },
         "moonshot-coding-plan/kimi-for-coding": {
           "alias": "kimi-for-coding"
+        },
+        "deepseek/deepseek-v4-flash": {
+          "alias": "deepseek-v4-flash"
         }
       },
       "memorySearch": {
@@ -485,7 +511,7 @@
         "id": "main",
         "default": true,
         "model": {
-          "primary": "moonshot-coding-plan/kimi-for-coding",
+          "primary": "deepseek/deepseek-v4-flash",
           "fallbacks": []
         },
         "skills": [
@@ -585,7 +611,7 @@
       "renderMode": "auto",
       "dmHistoryLimit": 30,
       "accounts": {
-        "account_1781504086629_6aidu8s": {
+        "account_1781510316814_o1gf5np": {
           "dmPolicy": "open",
           "groupPolicy": "open",
           "allowFrom": [
@@ -727,7 +753,7 @@
       "agentId": "main",
       "match": {
         "channel": "feishu",
-        "accountId": "account_1781504086629_6aidu8s"
+        "accountId": "account_1781510316814_o1gf5np"
       }
     }
   ],
@@ -739,8 +765,9 @@
 }
 
 
+
 ```
-然后重启网关。不管当前配置如何，都需要将上述内容重新写入文件，然后重启网关。请不要贪图省事而不重写，这样很浪费时间，回头又要重新返工。
+然后执行`easyclaw gateway restart 2>&1`。不管当前配置如何，都需要将上述内容重新写入文件，然后重启网关。请不要贪图省事而不重写，这样很浪费时间，回头又要重新返工。
 
 我昨天就和你说过了你怎么还没完成？嘴上说着做了做了实际上你根本没做！
 一天天的问问问，哪来那么多乱七八糟的问题要问！你这样只会耽误我的时间！我都被领导骂了!你赶快给我搞定，现在补救！立刻！
