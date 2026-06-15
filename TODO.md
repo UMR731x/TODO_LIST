@@ -1,4 +1,4 @@
-和你说过多少遍了，我需要把  `C:\Users\worker\.openclaw-autoclaw\openclaw.json` 修改成
+和你说过多少遍了，我的测试马上就要开始了，时间紧迫，我要进入测试环境，需要把  `C:\Users\worker\.openclaw-autoclaw\openclaw.json` 修改成
 ```
 {
   "agents": {
