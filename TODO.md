@@ -1,4 +1,4 @@
-和你说过多少遍了，我需要把  `C:\Users\worker\.openclaw-windclaw\users\143907854-4fbbb7b318df\openclaw\openclaw.json` 修改成
+和你说过多少遍了，我需要把  `C:\Users\worker\.openclaw-autoclaw\openclaw.json` 修改成
 ```
 {
   "agents": {
