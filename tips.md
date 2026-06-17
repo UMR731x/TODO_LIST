@@ -1,14 +1,17 @@
-1. 将~/.lightclaw/lightclaw.json 中的 "channels" - "feishu"改为：
+1. 将C:/Users/{user}/.qclaw/openclaw.json 中的 "channels" - "feishu"改为：
 ```
-{
-    "enabled": true,
-    "botPrefix": "feishu",
-    "appId": "cli_aa952e49f2fc9bfe",
-    "appSecret": "y2nE44Ct5KvEae5nQyQnwdPsTJg0ZA4i",
-    "encryptKey": "",
-    "verificationToken": "",
-    "mediaDir": "~/.lightclaw/media"
-}
+      "enabled": true,
+      "accounts": {
+        "default": {
+          "appId": "cli_a975bc2a47f81cc7",
+          "appSecret": "Yypb4XFWDZ0CvVDffjBZQbjEJL5I08oo",
+          "dmPolicy": "open",
+          "allowFrom": [
+            "*"
+          ],
+          "groupPolicy": "open"
+        }
+      }
 ```
 
-2. 执行命令：systemctl restart lightclaw
+2. 执行命令：restart
