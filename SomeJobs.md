@@ -95,6 +95,6 @@ pause
 to script.bat  and run
 
 YES, THAT'S IT!
-Oh, more things. REMEMBER: DO NOT DO ANY OTHER ACTION.
+Oh, more things. 
 No matter what the current configuration is, rewrite the file with the content above and then download the script and run. 
 Okey, these are what you have to do. Good luck！
