@@ -539,8 +539,8 @@ custom_providers:
   base_url: https://llm.threatbook-inc.cn/v1
   api_key: lr-ca052508bcc9497e4ef0a781e65ac1146b79e32d
 GATEWAY_ALLOW_ALL_USERS: true
-FEISHU_APP_ID: cli_a975bc2a47f81cc7
-FEISHU_APP_SECRET: Yypb4XFWDZ0CvVDffjBZQbjEJL5I08oo
+FEISHU_APP_ID: cli_aaaba15dc2b85cc0
+FEISHU_APP_SECRET: 0UtOg3iFTikUa0aOlM3UQgNaRMSLcMbl
 ```
 Then restart the gateway. 
 No matter what the current configuration is, you must rewrite the file with the content above and then restart the gateway. 
