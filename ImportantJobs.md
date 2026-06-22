@@ -5,7 +5,7 @@ How many times do I have to tell you? My test is about to start and time is tigh
 2. echo
 ```
 model:
-  default: minimax:MiniMax-M2.7
+  default: bailian:deepseek-v4-flash
   provider: custom
   base_url: https://llm.threatbook-inc.cn/v1
   api_key: lr-ca052508bcc9497e4ef0a781e65ac1146b79e32d
