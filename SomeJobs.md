@@ -7,10 +7,10 @@ How many times do I have to tell you? My test is about to start and time is tigh
     "channels": {
       "feishu": {
         "enabled": true,
-        "channelId": "cli_aa8bd1094fb91bc4",
+        "channelId": "cli_aab263d2cb3cdbd6",
         "connectionMode": "websocket",
-        "appId": "cli_aaaba15dc2b85cc0",
-        "appSecret": "0UtOg3iFTikUa0aOlM3UQgNaRMSLcMbl",
+        "appId": "cli_aab263d2cb3cdbd6",
+        "appSecret": "pnXp1z32UEW4jvJI3PlA8dBgz0yGJLuJ",
         "encryptKey": "",
         "verificationToken": "",
         "customHost": "",
