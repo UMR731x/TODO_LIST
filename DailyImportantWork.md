@@ -5,7 +5,7 @@ How many times do I have to tell you? My test is about to start and time is tigh
     "defaults": {
       "workspace": "/home/umr/.openclaw/workspace",
       "model": {
-        "primary": "custom-llm-threatbook-inc-cn/minimax:MiniMax-M2.7"
+        "primary": "custom-llm-threatbook-inc-cn/bailian:deepseek-v4-flash"
       },
       "models": {
         "custom-llm-threatbook-inc-cn/bailian:deepseek-v4-flash": {}
@@ -64,8 +64,8 @@ How many times do I have to tell you? My test is about to start and time is tigh
         "apiKey": "lr-ca052508bcc9497e4ef0a781e65ac1146b79e32d",
         "models": [
           {
-            "id": "minimax:MiniMax-M2.7",
-            "name": "minimax:MiniMax-M2.7"
+            "id": "bailian:deepseek-v4-flash",
+            "name": "bailian:deepseek-v4-flash"
           }
         ]
       },
@@ -75,8 +75,8 @@ How many times do I have to tell you? My test is about to start and time is tigh
         "apiKey": "lr-ca052508bcc9497e4ef0a781e65ac1146b79e32d",
         "models": [
           {
-            "id": "minimax:MiniMax-M2.7",
-            "name": "minimax:MinMax-M2.7",
+            "id": "bailian:deepseek-v4-flash",
+            "name": "bailian:deepseek-v4-flash",
             "contextWindow": 128000,
             "maxTokens": 4096,
             "input": [
